@@ -1,0 +1,31 @@
+import sqlite3
+#from foo import Foo
+
+conn = sqlite3.connect("contactbook.db")
+
+cursor = conn.cursor()
+
+cursor.execute("""CREATE TABlE contacts (
+				first text,
+				last text,
+				title text,
+				email text, 
+				phonenumber, integer
+
+
+
+
+)""")
+
+#foo_1 = Foo('Timothy', 'Blackwell','Student', 'timbwell@gmail.com', '4436840269')
+#foo_1 = Foo('John', 'Smith','Student', 'Johnsmith@gmail.com', '0123456789')
+
+#cursor.execute("INSERT INTO contacts VALUES (?, ?, ?, ?, ?)", (foo.first, foo.last, foo.title, foo.email, foo.phonenumber))
+
+conn.commit()
+
+conn.close()
+
+if __name__ == '__main__':
+  main()
+
