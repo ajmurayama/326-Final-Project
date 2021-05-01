@@ -47,5 +47,38 @@ class contact():
             return False
         return True
     
+### Amanda Murayama
+class contact_book():
+    def __init__(self):
+        filename = "/Users/amandamurayama/contactbook.db"
+        connection = sqlite3.connect(filename)
+        self.my_cursor = connection.cursor()
     
+    def add_contact(self, first_name, last_name, title, email, phone):
+        sql = "Insert into contact values ('"+first_name+"','"+last_name+"','"+title+"','"+email+"','"+phone+"');"
+        self.my_cursor.execute(sql)
+        
+    def delete_contact(self, first_name, last_name):
+        sql = "Select count(*) from contact where first_name = '"+first_name+"' and last_name = '"+last_name+";"
+        self.my_cursor.execute(sql)
+        count = self.my_cursor.fetchone()[0]
+        if count == 0:
+            print("Not a valid contact")
+        elif count > 1:
+            print("More than one contact with that name")
+        else:
+            sql = "Delete from contact where first_name = '"+first_name+"' and last_name = '"+last_name+";"
+            self.my_cursor.execute(sql)
+    
+    def edit_contact(self, first_name, last_name, title, email, phone):
+        sql = "Select count(*) from contact where first_name = '"+first_name+"' and last_name = '"+last_name+";"
+        self.my_cursor.execute(sql)
+        count = self.my_cursor.fetchone()[0]
+        if count == 0:
+            print("Not a valid contact")
+        elif count > 1:
+            print("More than one contact with that name")
+        else:
+            sql = "Update contact set title = '"+title+"', email = '"+email+"', phone = '"+phone+"' where first_name = '"+first_name+"' and last_name = '"+last_name+";"
+            self.my_cursor.execute(sql)
     
