@@ -99,5 +99,6 @@ if __name__ == "__main__":
     cbook.add_contact("Jake", "Stark", "group member", "jakestark99@gmail.com", "203-913-5328")
     cbook.add_contact("Jim", "Bob", "guy", "jimbob@gmail.com", "207-943-5528")
     cbook.add_contact("Un", "Wanted", "random", "unwan@gmail.com", "999-999-999")
-    cbook.delete_contact("Un","Wanted")
+    #cbook.edit_contact("Jim", "Bob", "friend", "myfriend@gmail.com", "204-560-5556")
+    cbook.delete_contact('Un', 'Wanted')
     cbook.view_contacts()
