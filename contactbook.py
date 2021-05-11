@@ -1,5 +1,6 @@
 ### INST326 Group Project\
 ###Jake Stark
+import sqlite3
 
 class contact():
     """ A class representing a contact that will exist within the contact book
@@ -50,9 +51,11 @@ class contact():
 ### Amanda Murayama
 class contact_book():
     def __init__(self):
-        filename = "/Users/amandamurayama/contactbook.db"
+        filename = "contactbook.db"
         connection = sqlite3.connect(filename)
         self.my_cursor = connection.cursor()
+        #create ="CREATE TABLE contact (first_name TEXT, last_name TEXT, title TEXT, Email TEXT, phone TEXT)"
+        #self.my_cursor.execute(create)
     
     def add_contact(self, first_name, last_name, title, email, phone):
         sql = "Insert into contact values ('"+first_name+"','"+last_name+"','"+title+"','"+email+"','"+phone+"');"
@@ -82,3 +85,19 @@ class contact_book():
             sql = "Update contact set title = '"+title+"', email = '"+email+"', phone = '"+phone+"' where first_name = '"+first_name+"' and last_name = '"+last_name+";"
             self.my_cursor.execute(sql)
     
+    def view_contacts(self):
+        sql = "Select * FROM contact"
+        result = self.my_cursor.execute(sql).fetchall()
+        for row in result:
+            print(row)
+            print("\n")
+    
+#Jake Stark
+#THIS IS FOR MAKING SURE THE SQL WORKS NOT FINAL
+if __name__ == "__main__":
+    cbook = contact_book()
+    cbook.add_contact("Jake", "Stark", "group member", "jakestark99@gmail.com", "203-913-5328")
+    cbook.add_contact("Jim", "Bob", "guy", "jimbob@gmail.com", "207-943-5528")
+    cbook.add_contact("Un", "Wanted", "random", "unwan@gmail.com", "999-999-999")
+    cbook.delete_contact("Un","Wanted")
+    cbook.view_contacts()
