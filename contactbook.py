@@ -17,7 +17,7 @@ class contact_book():
         self.my_cursor.execute(sql)
         
     def delete_contact(self, first_name, last_name):
-        sql = "Select count(*) from contact where first_name = '"+first_name+"' and last_name = '"+last_name+";"
+        sql = "Select count(*) from contact where first_name = '"+first_name+"' and last_name = '"+last_name+"';"
         self.my_cursor.execute(sql)
         count = self.my_cursor.fetchone()[0]
         if count == 0:
@@ -25,11 +25,11 @@ class contact_book():
         elif count > 1:
             print("More than one contact with that name")
         else:
-            sql = "Delete from contact where first_name = '"+first_name+"' and last_name = '"+last_name+";"
+            sql = "Delete from contact where first_name = '"+first_name+"' and last_name = '"+last_name+"';"
             self.my_cursor.execute(sql)
     
     def edit_contact(self, first_name, last_name, title, email, phone):
-        sql = "Select count(*) from contact where first_name = '"+first_name+"' and last_name = '"+last_name+";"
+        sql = "Select count(*) from contact where first_name = '"+first_name+"' and last_name = '"+last_name+"';"
         self.my_cursor.execute(sql)
         count = self.my_cursor.fetchone()[0]
         if count == 0:
@@ -37,7 +37,7 @@ class contact_book():
         elif count > 1:
             print("More than one contact with that name")
         else:
-            sql = "Update contact set title = '"+title+"', email = '"+email+"', phone = '"+phone+"' where first_name = '"+first_name+"' and last_name = '"+last_name+";"
+            sql = "Update contact set title = '"+title+"', email = '"+email+"', phone = '"+phone+"' where first_name = '"+first_name+"' and last_name = '"+last_name+"';"
             self.my_cursor.execute(sql)
     
     def view_contacts(self):
@@ -54,10 +54,11 @@ if __name__ == "__main__":
     cbook.add_contact("Jake", "Stark", "group member", "jakestark99@gmail.com", "203-913-5328")
     cbook.add_contact("Jim", "Bob", "guy", "jimbob@gmail.com", "207-943-5528")
     cbook.add_contact("Joe", "Goodman", "guy", "jgoodman@gmail.com", "207-943-5528")
-    cbook.add_contact("Karen", "Wally", "cousin", "kwal@yahoo.com", "750-260-3215")
+    cbook.add_contact("Karen", "Wally", "girlfriend", "kwal@yahoo.com", "750-260-3215")
     cbook.add_contact("Gabriel", "Cruz", "Teacher", "gcruz@umd.edu", "240-854-9567")
     cbook.add_contact("Kim", "Smith", "TA", "kismith@umd.du", "240-978-6754")
     cbook.add_contact("Un", "Wanted", "random", "unwan@gmail.com", "965-454-7865")
     
-    cbook.delete_contact('Un', 'Wanted',)
+    cbook.delete_contact('Un', "Wanted")
+    cbook.edit_contact('Karen', 'Wally', 'wife', 'kwal@yahoo.com', '203-913-5764')
     cbook.view_contacts()
