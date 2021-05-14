@@ -1,14 +1,9 @@
 import sqlite3
 import tkinter as tk
 from PIL import ImageTk,Image
-#from foo import Foo
-#class Gui():
-""" This class creates a graphical user interface with a display that takes in user input
-relating to contact information and then stores that into a database file. The user inut dissapears after the user 
-clicks the submit button"""
+"""Using tkinter to create a GUI application and sqlite3 to create a database where input from GUI can be stored """
 root = tk.Tk()
 root.title("Contact Book")
-	#root.iconbitmap("gui/finalproject.ico")
 root.geometry("500x500")
 conn = sqlite3.connect("contactbook.db")
 sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS contacts (
