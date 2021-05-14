@@ -1,27 +1,26 @@
 import sqlite3
 import tkinter as tk
 from PIL import ImageTk,Image
-"""Using tkinter to create a GUI application and sqlite3 to create a database where input from GUI can be stored """
+import os.path
+
 root = tk.Tk()
 root.title("Contact Book")
 root.geometry("500x500")
-conn = sqlite3.connect("contactbook.db")
-sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS contacts (
+
+def submit():
+	conn = sqlite3.connect("contactsdatabase.db")
+	c = conn.cursor()
+
+	c.execute(""" CREATE TABLE IF NOT EXISTS contacts (
                                         f_name text
                                         l_name text
                                         title  text
                                         email  text
                                         phonenumber integer
 
-                                    ); """
-conn.commit()
-def submit():
-
-	conn = sqlite3.connect("contactbook.db")
-
-	cursor = conn.cursor()
-
-	cursor.execute("INSERT INTO contacts VALUES (:f_name, :l_name, :title, :email, :phonenumber)",
+                                    ); """)
+	
+	cursor.execute("INSERT INTO contacts VALUES (f_name, l_name, title, email, phonenumber)",
 
 	{
 		'f_name': f_name.get(),
@@ -43,11 +42,11 @@ def submit():
 	email.delete(0, END)
 	phonenumber.delete(0, END)
 def query():
-	conn = sqlite3.connect("contactbook.db")
+	conn = sqlite3.connect("contactsdatabase.db")
 
-	cursor = conn.cursor()
+	c = conn.cursor()
 
-	cursor.execute("SELECT *, oid FROM contacts")
+	c.execute("SELECT *, oid FROM contacts")
 
 	records = cursor.fetchall()
 	print(records)
@@ -58,7 +57,7 @@ def query():
 		query_label = tk.Label(root, text=print_records)
 		query_label.grid(row=8, column=0, columnspan=2)
 		query_label.pack()
-		conn.commit()
+	conn.commit()
 
 	conn.close()
 		
@@ -88,14 +87,13 @@ phonenumber_label.grid(row=4, column=0)
 submit_button = tk.Button(root, text="Add Contact to Database", command=submit)
 submit_button.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 #create buttons on interface, query
-query_button = tk.Button(root, text="show contacts", command=query)
+query_button = tk.Button(root, text="Show Contacts", command=query)
 query_button.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
 
 
 #Commit
-conn.commit()
-
+#
 #Close connection
-conn.close()
+#conn.close()
 
 root.mainloop()
