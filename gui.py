@@ -4,7 +4,7 @@ import tkinter as tk
 from PIL import ImageTk,Image
 import os.path
 """ This python file contains a script that creates a database in your present working directory(the one you save this file to/import to)
-called "contactsbook.db"(assuming one does not already exist) Using tkinter, a gui interface was created that displays text box widgets which allow
+called "contactbook.db"(assuming one does not already exist) Using tkinter, a gui interface was created that displays text box widgets which allow
 a user to input contact information. The buttons on the GUI application store contact information and display contact database results. 
 To run this GUI using the terminal, go to the directory where you have gui.py saved, then type "python gui.py" into the command line
 """
@@ -13,7 +13,7 @@ root.title("Contact Book")
 root.geometry("500x500")
 
 def submit():
-	conn = sqlite3.connect("contactsbook.db")
+	conn = sqlite3.connect("contactbook.db")
 	c = conn.cursor()
 
 	c.execute(""" CREATE TABLE IF NOT EXISTS contacts (
@@ -46,7 +46,7 @@ def submit():
 	email.delete(0, END)
 	phonenumber.delete(0, END)
 def query():
-	conn = sqlite3.connect("contactsbook.db")
+	conn = sqlite3.connect("contactbook.db")
 
 	c = conn.cursor()
 
