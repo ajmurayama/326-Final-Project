@@ -3,3 +3,4 @@ This repository contains interelated python files which all contribute to a prog
 
 
 Challenges with this program have mostly stemmed from the following: using correct syntax for desired namespace or path of the database file being created, syntax and decision on the required command line arguments for the scripts related to delete, adding, and editing to the database, and using sqlite3 such that the database does not lock when info is added to it.
+ 
