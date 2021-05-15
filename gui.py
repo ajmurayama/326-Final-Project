@@ -8,19 +8,18 @@ root.title("Contact Book")
 root.geometry("500x500")
 
 def submit():
-	conn = sqlite3.connect("contactsdatabase.db")
+	conn = sqlite3.connect("contactsbook.db")
 	c = conn.cursor()
 
-	c.execute(""" CREATE TABLE IF NOT EXISTS contacts (
-                                        f_name text
-                                        l_name text
-                                        title  text
-                                        email  text
+	c.execute(""" CREATE TABLE contacts (
+                                        f_name text,
+                                        l_name text,
+                                        title text,
+                                        email text,
                                         phonenumber integer
-
-                                    ); """)
+                                        ) """)
 	
-	cursor.execute("INSERT INTO contacts VALUES (f_name, l_name, title, email, phonenumber)",
+	c.execute("INSERT INTO contacts VALUES (:f_name, :l_name, :title, :email, :phonenumber)",
 
 	{
 		'f_name': f_name.get(),
@@ -42,11 +41,11 @@ def submit():
 	email.delete(0, END)
 	phonenumber.delete(0, END)
 def query():
-	conn = sqlite3.connect("contactsdatabase.db")
+	conn = sqlite3.connect("contactsbook.db")
 
 	c = conn.cursor()
 
-	c.execute("SELECT *, oid FROM contacts")
+	c.execute("SELECT * FROM contacts")
 
 	records = cursor.fetchall()
 	print(records)
@@ -97,3 +96,4 @@ query_button.grid(row=7, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
 #conn.close()
 
 root.mainloop()
+
