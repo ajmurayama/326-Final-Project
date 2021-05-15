@@ -38,7 +38,7 @@ def submit():
 	conn.close()
 
 	#clear text boxes
-	f_name.delete(0, )
+	f_name.delete(0, END)
 	l_name.delete(0, END)
 	title.delete(0, END)
 	email.delete(0, END)
@@ -48,11 +48,9 @@ def query():
 
 	c = conn.cursor()
 
-	c.execute("SELECT * FROM contacts")
-
+	c.execute("SELECT *, oid FROM contacts")
 	records = c.fetchall()
 	print(records)
-
 	for record in records:
 		print_records += str(record) + "\n"
 		query_label = tk.Label(root, text=print_records)
